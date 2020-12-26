@@ -1,0 +1,76 @@
+{%extends 'base.html'%}
+{%block title%} Doctor-and-Nurse Details {%endblock%}
+{%block content%}
+<center> 
+    <h1> Welcome to Doctor and Nurse Data Accessing Area</h1>
+    <br/>
+    <hr/>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="table-p">
+        <table border='1' class="table table-dark">
+            <tr>
+                <th> Click the buttons to get the details </th>
+            </tr>
+            <tr>
+                <tr><td> <input type="submit" class="btn btn-light" value = 'Get all Doctor Details' name = 'ddchoice'></td></tr>
+                <tr><td> <input type= 'submit' class="btn btn-light" value = 'Individual Doctor Details' name='ddchoice'></td></tr>
+                <tr><td> <input type="submit" class="btn btn-light" value = ' Get all Nurse Details ' name = 'ddchoice'></td></tr>
+                <tr><td> <input type= 'submit' class="btn btn-light" value = 'Individual Nurse Details' name='ddchoice'></td></tr>
+            </tr>
+        </table>
+    </div>
+    </form>
+
+    <hr/>
+    {% if doctors %}
+        <h2>Showing all doctors details!!</h2>
+        <hr/>
+        <div class="table-p1">
+        <table border='1' class="table table-dark">
+            <tr>
+                <th>Doctor ID</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Supervisor</th>
+            </tr>
+            {%for d in doctors%}
+                <tr>
+                    <td>{{d.Dr_id}}</td>
+                    <td>{{d.Name}}</td>
+                    <td>{{d.Designation}}</td>
+                    <td>{{d.Super_id}}</td>
+                </tr>
+            {%endfor%}
+
+        </table>
+    </div>
+        {% elif nurses %}
+        <h2>Showing nurse details!!</h2>
+        <hr/>
+        <div class="table-p1"> 
+        <table border='1' class="table table-dark">
+            <tr>
+                <th>Nurse ID</th>
+                <th>Name</th>
+                <th>Supervisor</th>
+            </tr>
+            {%for d in nurses%}
+                <tr>
+                    <td>{{d.Nurse_id}}</td>
+                    <td>{{d.Name}}</td>
+                    <td>{{d.Super_id}}</td>
+                </tr>
+            {%endfor%}
+
+        </table>
+    </div>
+        {%else%}
+            <h2>No data </h2>
+
+        {%endif%}
+
+
+
+</center>
+{%endblock%}

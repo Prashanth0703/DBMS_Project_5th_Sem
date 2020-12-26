@@ -1,0 +1,107 @@
+{%extends 'base.html' %} {%block title%} Single Doctor Details {%endblock%}
+{%block content%}
+<center>
+    <h1>Doctor Details Viewing Area</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="table-p2" style="margin-left: 30%; margin-right: 30%">
+            <table border="1" class="table table-dark">
+                <tr>
+                    <th style="text-align: center">Enter the Doctor ID</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <input
+                            class="btn btn-light"
+                            type="text"
+                            placeholder="Doctor ID.."
+                            name="Did"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <input class="btn btn-light" type="submit" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <a class="btn btn-light" href="{{link}}">Back </a>
+    </form>
+    <hr />
+
+    {% if doctor %}
+    <h2>Showing doctor details!!</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Doctor ID</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Supervisor</th>
+            </tr>
+            {%for d in doctor%}
+            <tr>
+                <td>{{d.Dr_id}}</td>
+                <td>{{d.Name}}</td>
+                <td>{{d.Designation}}</td>
+                <td>{{d.Super_id}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {% if dmonitor %}
+    <hr />
+    <h2>Showing doctor Health Status</h2>
+    <h3>Recent five checkups</h3>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+            {%for d in dmonitor%}
+            <tr>
+                <td>{{d.Time}}</td>
+                <td>{{d.Status}}</td>
+                {%endfor%}
+            </tr>
+        </table>
+    </div>
+    {%endif%} {% if wards %}
+    <hr />
+    <h2>Showing doctor visiting wards</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Ward No and Name</th>
+            </tr>
+            {%for d in wards%}
+            <tr>
+                <td>{{d.Ward_ID}}</td>
+                {%endfor%}
+            </tr>
+        </table>
+    </div>
+    {%endif%} {%if error%}
+    <div
+        style="margin-left: 30%; margin-right: 30%"
+        class="alert alert-dark alert-dismissible fade show"
+        role="alert"
+    >
+        <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <p>{{error}}</p>
+        <p>Enter a valid Doctor ID</p>
+    </div>
+    {%endif%}
+</center>
+
+{%endblock%}

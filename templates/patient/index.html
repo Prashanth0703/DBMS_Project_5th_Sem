@@ -1,0 +1,148 @@
+{%extends 'base.html'%}
+{%block title%} Patient Details {%endblock%}
+{%block content%}
+
+<center>
+    <h1> Welcome to Patient Data Accessing Area</h1>
+    <br/>
+    <hr/>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="table-p">
+        <table border='1' class="table table-dark">
+            <tr>
+                <th> Click the buttons to get the details </th>
+            </tr>
+            <tr>
+                <tr><td> <input type="submit" class="btn btn-light" value = 'Get patient details' name = 'pdchoice'> </td></tr>
+                <tr><td> <input type= 'submit' class="btn btn-light" value = 'Admitted Patient Details' name='pdchoice'> </td></tr>
+                <tr><td> <input type= 'submit' class="btn btn-light" value = 'HomeQuarantine Patient Details'  name='pdchoice'> </td></tr>
+                <tr><td> <input type= 'submit' class="btn btn-light" value = 'Individual Patient Details' name='pdchoice'> </td></tr>
+            </tr>
+        </table>
+    </div>
+    </form>
+
+  
+    <hr/>
+        {% if patients %}
+            <h2>Showing all patient details!!</h2>
+            <hr/> 
+            <div class="table-p1">
+                <table border='1' class= "table table-dark">
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>City</th>
+                        <th>Street</th>
+                        <th>Pincode</th>
+                        <th>Symptoms</th>
+                        <th>Previous Disease</th>
+                        <th>Still Exits</th>
+                    </tr>
+                    {%for p in patients%}
+                        <tr>
+                            <td>{{p.P_id}}</td>
+                            <td>{{p.Name}}</td>
+                            <td>{{p.Age}}</td>
+                            <td>{{p.Gender}}</td>
+                            <td>{{p.City}}</td>
+                            <td>{{p.Street}}</td>
+                            <td>{{p.Pincode}}</td>
+                            <td>{{p.Symptomatic}}</td>
+                            <td>{{p.Previous_Disease}}</td>
+                            <td>{{p.Still_Exists}}</td>
+                        </tr>
+                    {%endfor%}
+    
+                </table>
+            </div>
+            
+        
+
+        {% elif adpat %}
+            <h2>Showing admitted patient's details!!</h2>
+            <hr/>
+            <table border='1' class="table table-dark" >
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th>Street</th>
+                    <th>Pincode</th>
+                    <th>Symptoms</th>
+                    <th>Previous Disease</th>
+                    <th>Still Exits</th>
+                    <th>Admitted ward No</th>
+                    <th>Priority</th>
+                    <th>Health Score</th>
+                </tr>
+                {%for p in adpat%}
+                    <tr>
+                        <td>{{p.0}}</td>
+                        <td>{{p.1}}</td>
+                        <td>{{p.2}}</td>
+                        <td>{{p.3}}</td>
+                        <td>{{p.4}}</td>
+                        <td>{{p.5}}</td>
+                        <td>{{p.6}}</td>
+                        <td>{{p.7}}</td>
+                        <td>{{p.8}}</td>
+                        <td>{{p.9}}</td>
+                        <td>{{p.10}}</td>
+                        <td>{{p.11}}</td>
+                        <td>{{p.12}}</td>
+                    </tr>
+                {%endfor%}
+            </table>
+        
+        {% elif hqpat %}
+        <h2>Showing home quarantined patient's details!!</h2>
+        <hr/>
+        <div class= "table-p1">
+        <table border='1' class="table table-dark">
+            <tr>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Age</th> 
+                <th>Gender</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Pincode</th>
+                <th>Symptoms</th>
+                <th>Previous Disease</th>
+                <th>Still Exits</th>
+                <th>Health Status</th>
+                <th>Any Physical Contacts</th>
+            </tr>
+            {%for p in hqpat%}
+                <tr>
+                    <td>{{p.0}}</td>
+                    <td>{{p.1}}</td>
+                    <td>{{p.2}}</td>                        <td>{{p.3}}</td>
+                    <td>{{p.4}}</td>
+                    <td>{{p.5}}</td>
+                    <td>{{p.6}}</td>
+                    <td>{{p.7}}</td>
+                    <td>{{p.8}}</td>
+                    <td>{{p.9}}</td>
+                    <td>{{p.10}}</td>
+                    <td>{{p.11}}</td>
+                </tr> 
+           {%endfor%}
+        </table>
+    </div>
+        {%else%}
+            <h2>No data </h2>
+
+        {%endif%}
+
+
+        
+
+</center>
+{%endblock%}

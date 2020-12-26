@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%block title%} Ward Details {%endblock%}
+
+{%block content%}
+<center> 
+    <h1> Welcome to Ward Data Accessing Area</h1>
+    <br/>
+    <hr/>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="table-p">
+        <table border='1' class= "table table-dark">
+            <tr>
+                <th> Click the buttons to get the details </th>
+            </tr>
+            <tr>
+                <tr><td> <input type="submit" class="btn btn-light" value = 'Get all ward details' name = 'wdchoice'> </td></tr>
+                <tr><td> <input type= 'submit' class="btn btn-light" value = 'Individual Ward Details' name='wdchoice'> </td></tr>
+            </tr>
+        </table>
+    </div>
+    </form>
+
+
+    <hr/>
+    {% if wards %}
+        <h2>Showing all ward details!!</h2>
+        <hr/> 
+        <div class="table-p1">
+        <table border='1' class="table table-dark">
+            <tr>
+                <th>Ward No</th>
+                <th>Name</th>
+                <th>Capacity</th>
+            </tr>
+            {%for d in wards%}
+                <tr>
+                    <td>{{d.Ward_No}}</td>
+                    <td>{{d.Name}}</td>
+                    <td>{{d.Capacity}}</td>
+                </tr>
+            {%endfor%}
+
+        </table>
+    </div>
+        
+      
+        {%else%}
+            <h2>No data </h2>
+
+        {%endif%}
+
+
+
+</center>
+{%endblock%}

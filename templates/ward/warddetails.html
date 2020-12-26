@@ -1,0 +1,131 @@
+{%extends 'base.html' %} {%block title%} Single Ward Details {%endblock%}
+{%block content%}
+<center>
+    <h1>Ward Details Viewing Area</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="table-p2" style="margin-left: 30%; margin-right: 30%">
+            <table border="1" class="table table-dark">
+                <tr>
+                    <th style="text-align: center">Enter the Ward No</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <input
+                            type="text"
+                            class="btn btn-light"
+                            placeholder="Ward No.."
+                            name="Wid"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <input type="submit" class="btn btn-light" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <a class="btn btn-light" href="{{link}}">Back </a>
+    </form>
+    <hr />
+
+    {% if ward %}
+    <h2>Showing ward details!!</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Ward No</th>
+                <th>Name</th>
+                <th>Capacity</th>
+            </tr>
+            {%for d in ward %}
+            <tr>
+                <td>{{d.Ward_No}}</td>
+                <td>{{d.Name}}</td>
+                <td>{{d.Capacity}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {% if manager %}
+    <hr />
+    <h2>Ward head nurse</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Nurse ID and Name</th>
+            </tr>
+            {%for d in manager%}
+            <tr>
+                <td>{{d.MgrNurse_ID}}</td>
+                {%endfor%}
+            </tr>
+        </table>
+    </div>
+    {%endif%} {% if patients %}
+    <hr />
+    <h2>Showing admitted patients</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Patient ID and Name</th>
+            </tr>
+            {%for d in patients%}
+            <tr>
+                <td>{{d.Pat_ID}}</td>
+                {%endfor%}
+            </tr>
+        </table>
+    </div>
+    {%endif%} {% if doctors %}
+    <hr />
+    <h2>Showing doctor who visit the ward</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Doctor Name</th>
+            </tr>
+            {%for d in doctors%}
+            <tr>
+                <td>{{d.Doc_ID}}</td>
+                {%endfor%}
+            </tr>
+        </table>
+    </div>
+    {%endif%} {% if nurses %}
+    <hr />
+    <h2>Showing nurses who visit the ward</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Nurse Name</th>
+            </tr>
+            {%for d in nurses%}
+            <tr>
+                <td>{{d.Nurse_ID}}</td>
+                {%endfor%}
+            </tr>
+        </table>
+    </div>
+    {%endif%} {%if error%}
+    <div
+        style="margin-left: 30%; margin-right: 30%"
+        class="alert alert-dark alert-dismissible fade show"
+        role="alert"
+    >
+        <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <p>{{error}}</p>
+        <p>Enter a valid Ward ID</p>
+    </div>
+    {%endif%}
+</center>
+{%endblock%}

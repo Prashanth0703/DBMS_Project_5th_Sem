@@ -1,0 +1,227 @@
+{%extends 'base.html' %} {%block title%} Single Patient Details {%endblock%}
+{%block content%}
+<center>
+    <h1>Patient Details Viewing Area</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="table-p2" style="margin-left: 30%; margin-right: 30%">
+            <table border="1" class="table table-dark">
+                <tr>
+                    <th style="text-align: center">Enter the Patient ID</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <input
+                            type="text"
+                            class="btn btn-light"
+                            placeholder="Patient ID.."
+                            name="P_id"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <input type="submit" class="btn btn-light" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <a class="btn btn-light" href="{{link}}">Back </a>
+    </form>
+    <hr />
+
+    {% if patient %}
+    <h2>Showing patient data...</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Pincode</th>
+                <th>Symptoms</th>
+                <th>Previous Disease</th>
+                <th>Still Exits</th>
+            </tr>
+            <!-- {%for p in patient%} -->
+            <tr>
+                <td>{{p.P_id}}</td>
+                <td>{{p.Name}}</td>
+                <td>{{p.Age}}</td>
+                <td>{{p.Gender}}</td>
+                <td>{{p.City}}</td>
+                <td>{{p.Street}}</td>
+                <td>{{p.Pincode}}</td>
+                <td>{{p.Symptomatic}}</td>
+                <td>{{p.Previous_Disease}}</td>
+                <td>{{p.Still_Exists}}</td>
+            </tr>
+            <!-- {%endfor%} -->
+        </table>
+    </div>
+    {%endif%} {%if diagnosis %}
+    <br />
+    <hr />
+    <h2>Showing patient diagnosis details...</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Diagnosis</th>
+                <th>Diag_Time</th>
+                <th>Hospital Recommendation</th>
+                <th>Patient Decision</th>
+            </tr>
+            {%for d in diagnosis%}
+            <tr>
+                <td>{{d.Diagnosis}}</td>
+                <td>{{d.Diag_Time}}</td>
+                <td>{{d.Hospital_Recom}}</td>
+                <td>{{d.Patient_Dec}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {%if adm %}
+    <br />
+    <hr />
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Ward No</th>
+                <th>Priority</th>
+                <th>Health score</th>
+            </tr>
+            {%for d in adm%}
+            <tr>
+                <td>{{d.Ward_ID}}</td>
+                <td>{{d.Priority}}</td>
+                <td>{{d.Health_Score}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {%if hqmd %}
+    <br />
+    <hr />
+    <h2>Showing patient home quarantine monitoring details...</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Health Status</th>
+                <th>Any contact</th>
+            </tr>
+            {%for i in hqmd%}
+            <tr>
+                <td>{{i.Health_Status}}</td>
+                <td>{{i.Movements}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {%if bankdetails %}
+    <br />
+    <hr />
+    <h2>Showing patient bank details...</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Bank Name</th>
+                <th>IFSC</th>
+                <th>Account number</th>
+                <th>Cheque number</th>
+                <th>Eligible</th>
+            </tr>
+            {%for b in bankdetails%}
+            <tr>
+                <td>{{b.Bank_Name}}</td>
+                <td>{{b.IFSC}}</td>
+                <td>{{b.Account_No}}</td>
+                <td>{{b.Cheque_no}}</td>
+                <td>{{b.Eligibility}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {%if payment %}
+    <br />
+    <hr />
+    <h2>Showing patient payment data...</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Bill ID</th>
+                <th>Mode of payment</th>
+                <th>Status</th>
+            </tr>
+            {%for p in payment%}
+            <tr>
+                <td>{{p.Bill_ID}}</td>
+                <td>{{p.Mode_of_Payment}}</td>
+                <td>{{p.Status}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {%if insurance %}
+    <br />
+    <hr />
+    <h2>Showing patient insurance data...</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Insurance Provider</th>
+                <th>Eligibility</th>
+            </tr>
+            {%for i in insurance%}
+            <tr>
+                <td>{{i.Insurance_Provider}}</td>
+                <td>{{i.Eligibility}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {%if dep %}
+    <br />
+    <hr />
+    <h2>Showing patient dependent's data...</h2>
+    <div class="table-p1">
+        <table border="1" class="table table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </tr>
+            {%for i in dep%}
+            <tr>
+                <td>{{i.Name}}</td>
+                <td>{{i.Age}}</td>
+                <td>{{i.Gender}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    {%endif%} {%if error%}
+    <div
+        style="margin-left: 30%; margin-right: 30%"
+        class="alert alert-dark alert-dismissible fade show"
+        role="alert"
+    >
+        <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <p>{{error}}</p>
+        <p>Enter a valid Patient ID</p>
+    </div>
+
+    {%endif%}
+</center>
+{%endblock%}

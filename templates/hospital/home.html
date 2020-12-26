@@ -1,0 +1,28 @@
+{%extends 'base.html'%} {%block content%} {% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+</head>
+<body>
+    <div class="cont">
+        <img
+            id="img"
+            src="https://i.ibb.co/jVBc04p/Screenshot-71.png"
+            alt="Screenshot-71"
+            border="0"
+        />
+        <form action="">
+            <div class="form">
+                <input id="name" name="name" type="text" placeholder="UserID" />
+                <input
+                    id="passwd"
+                    name="name"
+                    type="text"
+                    placeholder="Password"
+                />
+                <input type="submit" id="btn" />
+            </div>
+        </form>
+    </div>
+</body>
+{%endblock%}
